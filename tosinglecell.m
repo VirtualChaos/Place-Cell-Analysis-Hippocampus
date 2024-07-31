@@ -8,7 +8,7 @@
 %record of the cell indexing. As a guide, the row number corresponds to the
 %cell index and each digit corresponds to the the nth cell (Not ROI no.)
 
-sortingdirectories
+% sortingdirectories
 %cell array containing all known cell info and corresponding cell indexes.
 cellMaster = {};
 
@@ -167,7 +167,7 @@ for row = 1:size(dates, 1)
         
     end
         save(strcat('CellTracking_', ids{row}), 'trackingdata');
-    end
+end
     
 
         

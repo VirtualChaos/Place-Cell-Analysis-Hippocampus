@@ -3,20 +3,20 @@
 %folder, and a cell array containing the corresponding session dates. Each
 %ID in ids corresponds to a row in dates.
 
-%for example 
+%for example
 % cellarray1 | Cell Array 2
 % ID 35      | 20210507 ...
 % ID 37      | 20210507 ...
 
 list = dir;
 numfiles = 0;
-numanimals = 0; 
+numanimals = 0;
 ids = {};
 
 
 for i = 1:size(list,1)
     current_folder = list(i).name;
-    if  current_folder(1) == 'I' && current_folder(2) == 'D'
+    if  current_folder(1) == '2' && current_folder(2) == '0' && current_folder(3) == '2'
         temp = strcat(current_folder(1), current_folder(2), current_folder(3), current_folder(4));
         
         if isempty(ids)
@@ -24,36 +24,34 @@ for i = 1:size(list,1)
             numanimals = numanimals + 1;
             ids{numanimals} = temp;
             
-            
-            dates{numanimals, numfiles} = current_folder(6:end); 
-            
+            dates{numanimals, numfiles} = current_folder(1:end);    
         else
-
-                flag = 0;
-                for i = 1:length(ids)
-                    if temp == ids{i}
-                        numfiles = numfiles + 1;
-                        dates{i, end+1} = current_folder(6:end);
-                        flag = 1;
-                    end
-                        
+            
+            flag = 0;
+            for i = 1:length(ids)
+                if temp == ids{i}
+                    numfiles = numfiles + 1;
+                    dates{i, end+1} = current_folder(6:end);
+                    flag = 1;
                 end
                 
-                if flag == 0; %no match   
-                    numfiles = 1;
-                    numanimals = numanimals + 1;
-                    ids{numanimals} = temp;
-                    dates{numanimals, numfiles} = current_folder(6:end);
-
-                end
             end
             
+            if flag == 0; %no match
+                numfiles = 1;
+                numanimals = numanimals + 1;
+                ids{numanimals} = temp;
+                dates{numanimals, numfiles} = current_folder(6:end);
+                
+            end
         end
         
     end
-
-
-
-
-
     
+end
+
+
+
+
+
+
